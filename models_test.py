@@ -40,7 +40,7 @@ class Transaction:
         self.payment_method = payment_method
 
     def calculate_total(self) -> float:
-        return calculate_total(self.items)
+        return sum(item.price for item in self.items)
 
 
 class Customer:
@@ -55,15 +55,3 @@ class Customer:
 
     def is_verified(self) -> bool:
         return bool(self.name) and len(self.purchase_history) > 0
-
-
-def filter_by_category(items: list[FoodItem], category: Category) -> list[FoodItem]:
-    return [item for item in items if item.category == category]
-
-
-def sort_by_popularity(items: list[FoodItem], descending: bool = True) -> list[FoodItem]:
-    return sorted(items, key=lambda item: item.popularity_rating, reverse=descending)
-
-
-def calculate_total(items: list[FoodItem]) -> float:
-    return sum(item.price for item in items)
